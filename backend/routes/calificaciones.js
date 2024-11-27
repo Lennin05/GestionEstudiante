@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Calificacion = require("../models/calificacion");
+const calificacionesController = require("../controllers/calificacionesController");
 
-router.post("/", async (req, res) => {
-  const calificacion = new Calificacion(req.body);
-  await calificacion.save();
-  res.status(201).json(calificacion);
-});
+router.post("/", calificacionesController.asignarCalificacion);
+router.get("/:estudianteId", calificacionesController.getCalificacionesPorEstudiante);
 
 module.exports = router;
